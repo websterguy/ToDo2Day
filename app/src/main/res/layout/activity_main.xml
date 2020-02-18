@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity" >
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <EditText
+            android:id="@+id/taskEditText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:ems="10"
+            android:hint="@string/task"
+            android:inputType="textPersonName"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toStartOf="@+id/taskListView"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/addTaskButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/add"
+            app:layout_constraintEnd_toEndOf="@+id/taskEditText"
+            app:layout_constraintStart_toStartOf="@+id/taskEditText"
+            app:layout_constraintTop_toBottomOf="@+id/taskEditText" />
+
+        <Button
+            android:id="@+id/clearAllTasksButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/delete"
+            app:layout_constraintEnd_toEndOf="@+id/addTaskButton"
+            app:layout_constraintStart_toStartOf="@+id/addTaskButton"
+            app:layout_constraintTop_toBottomOf="@+id/addTaskButton" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ListView
+        android:id="@+id/taskListView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp" />
+
+</LinearLayout>
