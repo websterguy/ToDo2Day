@@ -2,11 +2,11 @@ package edu.miracosta.cs134.kwebb.todo2day.model;
 
 public class Task {
 
-    private int mId;
+    private long mId;
     private String mDescription;
     private boolean mIsDone;
 
-    public Task(int id, String description, boolean isDone) {
+    public Task(long id, String description, boolean isDone) {
         mId = id;
         mDescription = description;
         mIsDone = isDone;
@@ -20,11 +20,11 @@ public class Task {
         this(-1, description, false);
     }
 
-    public int getId() {
+    public long getId() {
         return mId;
     }
 
-    public void setId(int mId) {
+    public void setId(long mId) {
         this.mId = mId;
     }
 
