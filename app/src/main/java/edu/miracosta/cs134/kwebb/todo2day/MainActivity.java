@@ -2,11 +2,14 @@ package edu.miracosta.cs134.kwebb.todo2day;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -43,9 +46,6 @@ public class MainActivity extends AppCompatActivity {
         for (Task t : mAllTasks)
             Log.i("ToDo2Day", t.toString());
 
-
-
-
         // Instantiate list adapter
         mTaskListView = findViewById(R.id.taskListView);
         mTaskListAdapter = new TaskListAdapter(this, R.layout.task_item, mAllTasks);
@@ -60,13 +60,50 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void addTask(View v) {
-        Task newTask = new Task(mTaskEditText.getText().toString()); // id = -1
-        long id = mDB.addTask(newTask); // id set
-        newTask.setId(id); // Set on newTask
-        mAllTasks.add(newTask); // add to list
+        String description = mTaskEditText.getText().toString();
+
+        // Check if empty description before creating task
+        if (description.equals("")) {
+            Toast.makeText(this, "Give the task a name!", Toast.LENGTH_SHORT).show();
+        }
+        else {
+            Task newTask = new Task(description); // id = -1
+            long id = mDB.addTask(newTask); // id set
+            newTask.setId(id); // Set on newTask
+            mAllTasks.add(newTask); // add to list
+
+            // Refresh adapter to populate list
+            mTaskListAdapter.notifyDataSetChanged();
+        }
     }
 
     public void clearAllTasks(View v) {
+        mDB.clearAllTasks();
+        mAllTasks.clear();
+
+        // Update adapter
+        mTaskListAdapter.notifyDataSetChanged();
+    }
+
+    public void changeTaskStatus(View v) {
+        CheckBox boxClicked = (CheckBox) v;
+        /**
+         * TODO: HOW TO GET TASK BACK FROM ADAPTER?
+         * Get text then search through array list for the task with a description that matches?
+         * Seems like there should be an onclick listener or something to get the actual
+         * associated task that can just be updated
+         *
+        Task clickedTask = ????;
+
+         clickedTask.setDone(!clickedTask.isDone());
+
+         mDB.updateTask(clickedTask);
+         */
+        if (boxClicked.isChecked())
+            boxClicked.setPaintFlags(boxClicked.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+        else
+            boxClicked.setPaintFlags(boxClicked.getPaintFlags() & (~Paint.STRIKE_THRU_TEXT_FLAG));
+
 
     }
 }
