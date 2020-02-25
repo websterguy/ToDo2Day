@@ -87,23 +87,19 @@ public class MainActivity extends AppCompatActivity {
 
     public void changeTaskStatus(View v) {
         CheckBox boxClicked = (CheckBox) v;
-        /**
-         * TODO: HOW TO GET TASK BACK FROM ADAPTER?
-         * Get text then search through array list for the task with a description that matches?
-         * Seems like there should be an onclick listener or something to get the actual
-         * associated task that can just be updated
-         *
-        Task clickedTask = ????;
 
-         clickedTask.setDone(!clickedTask.isDone());
+        Task checkedTask = (Task) boxClicked.getTag();
 
-         mDB.updateTask(clickedTask);
-         */
+        // Toggle the done field of the task
+        checkedTask.setDone(!checkedTask.isDone());
+
+        // Update task in db
+        mDB.updateTask(checkedTask);
+
+        // Cross out checked text for fun
         if (boxClicked.isChecked())
             boxClicked.setPaintFlags(boxClicked.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
         else
             boxClicked.setPaintFlags(boxClicked.getPaintFlags() & (~Paint.STRIKE_THRU_TEXT_FLAG));
-
-
     }
 }

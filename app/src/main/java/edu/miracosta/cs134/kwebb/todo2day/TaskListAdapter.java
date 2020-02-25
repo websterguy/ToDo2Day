@@ -2,6 +2,7 @@ package edu.miracosta.cs134.kwebb.todo2day;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Paint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,6 +43,9 @@ public class TaskListAdapter extends ArrayAdapter<Task> {
         // Populate properties of check box from task
         isDoneCheckBox.setText(selectedTask.getDescription());
         isDoneCheckBox.setChecked(selectedTask.isDone());
+        if (isDoneCheckBox.isChecked()) // Cross out done items for fun
+            isDoneCheckBox.setPaintFlags(isDoneCheckBox.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+        isDoneCheckBox.setTag(selectedTask);
 
         return view;
     }
